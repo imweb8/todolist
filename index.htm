@@ -10,7 +10,7 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.2/firebase-app.js";
 
-        import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/9.9.2/firebase-database.js";
+        import { getDatabase, ref, set, push, onValue } from "https://www.gstatic.com/firebasejs/9.9.2/firebase-database.js";
       
         const firebaseConfig = {
           apiKey: "AIzaSyCi89QrbsT1egVYx0qJtefWVay15tamKd0",
@@ -23,8 +23,9 @@
         };
       
         const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
 
-        /*submit.addEventListener('click', (e)=>{
+        submit.addEventListener('click', (e)=>{
             set(ref(database, '/'),{
                 name : document.getElementById('name').value,
                 age : document.getElementById('age').value,
@@ -32,17 +33,21 @@
                 school : document.getElementById('school').value,
                 grade : document.getElementById('grade').value
             })
-        });*/
-
-                submit.addEventListener('click', (e)=>{
-            set(ref(database, '/'),{
-                name : "d",
-                age : 13,
-                address : "d",
-                school : "d",
-                grade : "d"
-            })
         });
+
+        onValue(ref(database, '/'), (snapshot)=>{
+            let listData = "";
+            snapshot.forEach((childsnapshot) => {
+                const childKey = childsnapshot.key;
+                const childData = childsnapshot.val();
+
+                listData = listData+childData.todo;
+
+                console.log(childKey);
+                console.log(childData);
+            });
+            document.getElementById('Todo_List').innerHTML = listData;
+        })
 
       </script>
 </head>
@@ -50,12 +55,6 @@
 <body>
     <div class="container">
         <h4>Todo_List</h4>
-        <div class="card card-body mt-3">
-            <div>
-            잠자기
-            <button type="button" class="btn btn-danger float-end">삭제</button>
-            </div>
-        </div>
         <div id="Todo_List">
             
         </div>
@@ -67,7 +66,7 @@
             <input type="text" id="grade" class="form-control" placeholder="학년">
         </div>
         <input type="text" class="form-control mt-3" placeholder="할 일을 입력하세요." id="plan">
-        <button type="submit" class="btn btn-primary mb-3 mt-3 w-100">입력하기</button>
+        <button type="submit" id="submit" class="btn btn-primary mb-3 mt-3 w-100">입력하기</button>
     </div>
 </body>
 </html>
