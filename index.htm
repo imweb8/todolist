@@ -27,11 +27,7 @@
 
         submit.addEventListener('click', (e)=>{
             set(ref(database, '/'),{
-                name : document.getElementById('name').value,
-                age : document.getElementById('age').value,
-                address : document.getElementById('address').value,
-                school : document.getElementById('school').value,
-                grade : document.getElementById('grade').value
+                todo : document.getElementById('plan').value
             })
         });
 
@@ -57,13 +53,6 @@
         <h4>Todo_List</h4>
         <div id="Todo_List">
             
-        </div>
-        <div class="mt-2">
-            <input type="text" id="name" class="form-control" placeholder="이름">
-            <input type="text" id="age" class="form-control" placeholder="나이">
-            <input type="text" id="address" class="form-control" placeholder="주소">
-            <input type="text" id="school" class="form-control" placeholder="학교">
-            <input type="text" id="grade" class="form-control" placeholder="학년">
         </div>
         <input type="text" class="form-control mt-3" placeholder="할 일을 입력하세요." id="plan">
         <button type="submit" id="submit" class="btn btn-primary mb-3 mt-3 w-100">입력하기</button>
