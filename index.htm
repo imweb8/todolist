@@ -26,23 +26,26 @@
         const database = getDatabase(app);
 
         submit.addEventListener('click', (e)=>{
-            set(ref(database, '/'),{
+            set(push(ref(database, '/')),{
                 todo : document.getElementById('plan').value
             })
         });
 
         onValue(ref(database, '/'), (snapshot)=>{
-            console.log(snapshot);
-
             let listData = "";
+
             snapshot.forEach((childsnapshot) => {
-                const childKey = childsnapshot.key;
-                const childData = childsnapshot.val();
+                console.log(childsnapshot.key);
+                console.log(childsnapshot.val().todo);
 
-                listData = listData+childData.todo;
+                listData = listData+childsnapshot.val().todo+"<br>";
+                //const childKey = childsnapshot.key;
+                //const childData = childsnapshot.val();
 
-                console.log(childKey);
-                console.log(childData);
+                //listData = listData+childData.todo;
+
+                //console.log(childKey);
+                //console.log(childData);
             });
             document.getElementById('Todo_List').innerHTML = listData;
         })
