@@ -40,27 +40,46 @@
             })
         });
 
+        const todo_delete = (e)=>{
+            console.log(e);
+        }
+        /*
+        btnDelete.addEventListener('click', (e)=>{
+            remove(ref(database, '/'))
+        })
+        */
 
         onValue(ref(database, '/'), (snapshot)=>{
-            let listData = "";
-
+            document.getElementById('Todo_List').innerHTML = "";
             snapshot.forEach((childsnapshot) => {
                 console.log(childsnapshot.key);
                 console.log(childsnapshot.val().todo);
 
-                listData = listData+childsnapshot.val().todo+"<tr><td style=color:gray; ><button type='button' class='btn btn-danger' onclick='deleteIt()'>삭제</button></td></tr>"+"<br>";
+                let div = document.createElement('div');
+                div.setAttribute('class', 'card card-body mt-1');
+                div.setAttribute('id', 'div'+childsnapshot.key);
+                document.getElementById('Todo_List').appendChild(div);
 
-                //const childKey = childsnapshot.key;
-                //const childData = childsnapshot.val();
+                let div2 = document.createElement('div');
+                div2.setAttribute('id', 'div2'+childsnapshot.key);
+                document.getElementById('div'+childsnapshot.key).appendChild(div2);
 
-                //listData = listData+childData.todo;
+                let span = document.createElement('span');
+                let spantext = document.createTextNode(childsnapshot.val().todo);
+                span.appendChild(spantext);
+                document.getElementById('div2'+childsnapshot.key).appendChild(span)
 
-                //console.log(childKey);
-                //console.log(childData);
+                let btn = document.createElement('button')
+                let btntext = document.createTextNode('삭제')
+                btn.appendChild(btntext);
+                btn.setAttribute('type', 'button');
+                btn.setAttribute('class', 'btn btn-danger float-end');
+                document.getElementById('div2'+childsnapshot.key).appendChild(btn)
+
+                btn.addEventListener('click', todo_delete);
+
             });
-            document.getElementById('Todo_List').innerHTML = listData;
         })
-
 
       </script>
 </head>
