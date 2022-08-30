@@ -34,12 +34,28 @@
         const app = initializeApp(firebaseConfig);
         const database = getDatabase(app);
 
-        submit.addEventListener('click', (e)=>{
-            set(push(ref(database, '/')),{
+        const addData = ()=>{
+            if(document.getElementById('plan').value){
+                set(push(ref(database, '/')),{
                 todo : document.getElementById('plan').value
             })
             document.getElementById('plan').value="";
             document.getElementById('plan').focus();
+            }
+            else{
+                document.getElementById('inputalert').style.display = "block";
+            }
+        }
+
+        submit.addEventListener('click', (e)=>{
+            addData()
+        });
+
+        plan.addEventListener('keypress', (e)=>{
+            document.getElementById('inputalert').style.display = "none";
+            if(e.keyCode==13){
+                addData()
+            }
         });
 
         const todo_delete = (e)=>{
@@ -90,6 +106,7 @@
         <div id="Todo_List">
             
         </div>
+        <div id="inputalert" style="display: none" class="alert alert-danger mt-1">할일을 입력하세요!</div>
         <input type="text" class="form-control mt-3" placeholder="할 일을 입력하세요." autofocus="autofocus" id="plan">
         <button type="submit" id="submit" class="btn btn-primary mb-3 mt-3 w-100">입력하기</button>
     </div>
