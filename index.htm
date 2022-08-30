@@ -38,10 +38,12 @@
             set(push(ref(database, '/')),{
                 todo : document.getElementById('plan').value
             })
+            document.getElementById('plan').value="";
+            document.getElementById('plan').focus();
         });
 
         const todo_delete = (e)=>{
-            console.log(e);
+            remove(ref(database, '/'+e.target.id))
         }
         /*
         btnDelete.addEventListener('click', (e)=>{
@@ -52,8 +54,6 @@
         onValue(ref(database, '/'), (snapshot)=>{
             document.getElementById('Todo_List').innerHTML = "";
             snapshot.forEach((childsnapshot) => {
-                console.log(childsnapshot.key);
-                console.log(childsnapshot.val().todo);
 
                 let div = document.createElement('div');
                 div.setAttribute('class', 'card card-body mt-1');
@@ -74,10 +74,10 @@
                 btn.appendChild(btntext);
                 btn.setAttribute('type', 'button');
                 btn.setAttribute('class', 'btn btn-danger float-end');
+                btn.setAttribute('id', childsnapshot.key);
                 document.getElementById('div2'+childsnapshot.key).appendChild(btn)
 
                 btn.addEventListener('click', todo_delete);
-
             });
         })
 
@@ -86,11 +86,11 @@
 
 <body>
     <div class="container">
-        <h4>Todo_List</h4>
+        <h4 class="mt-3">Todo_List</h4>
         <div id="Todo_List">
             
         </div>
-        <input type="text" class="form-control mt-3" placeholder="할 일을 입력하세요." id="plan">
+        <input type="text" class="form-control mt-3" placeholder="할 일을 입력하세요." autofocus="autofocus" id="plan">
         <button type="submit" id="submit" class="btn btn-primary mb-3 mt-3 w-100">입력하기</button>
     </div>
 </body>
