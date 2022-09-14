@@ -13,9 +13,6 @@
 
       import { getDatabase, ref, set, push, onValue, remove, get, child } from "https://www.gstatic.com/firebasejs/9.9.2/firebase-database.js";
 
-      function deleteIt(){
-          remove(ref(database, '/'))
-      };
       const firebaseConfig = {
     apiKey: "AIzaSyBvlYTzSzaFgQdpknPcXjZDa4O-OGmpfG0",
     authDomain: "reservation-bfb32.firebaseapp.com",
@@ -35,9 +32,11 @@
           alert("이미 등록한 번호입니다.")
         }
         else{
+          const today = new Date();
           set(ref(database, '/'+document.getElementById('phone').value), {
             name : document.getElementById("name").value,
-            phone : document.getElementById('phone').value,
+            regTime : today.toLocaleString(),
+            enterTime : ''
           })
           document.getElementById('name').value="";
           document.getElementById('phone').value="";
@@ -53,14 +52,16 @@
 </head>
 
 <body style="text-align: center;">
-    <h2 class="mt-3">TOMMOROW X TOGETHER 월드콘서트 참가 사전등록</h4>
+  <img src="https://mir-s3-cdn-cf.behance.net/project_modules/2800_opt_1/f09672144228879.62889cdfe2b06.jpg" alt="" style="width: 400px; height: 250px">
+
+    <h2 class="mt-3">SEVENTEEN 월드콘서트 참가 사전등록</h4>
     <h4 class="mt-2">월드투어의 사전 참가를 위한 페이지입니다. 올바른 정보를 입력하세요.</h2>
     <input type="text" placeholder="*이름" class="form-control mt-3" id="name">
     <input type="text" placeholder="*전화번호" class="form-control mt-3" id="phone">
     
     <h3 class="mt-3" style="color: rgb(43, 43, 43);"><b>개인정보 이용 동의</b></h3>
     <div class="card card-body" style="color: black;"><b>월드투어 입장을 위한 개인정보 수집 및 이용동의에 대한 안내</b><br>
-        1. 수집목적 : 투머로우바이투게더의 월드투어 입장 관리<br>
+        1. 수집목적 : 세븐틴의 월드투어 입장 관리<br>
         2. 수집내용 : 이름, 전화번호<br>
         3. 수집이용기간 : 월드투어 종료 후 일주일<br>
         4. 본 수집 및 이용 동의를 거부할 수 있습니다. 단, 거부시 온라인을 통한 사전등록이 제한됩니다.
