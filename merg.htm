@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.2/firebase-app.js";
+
+    import { getDatabase, ref, set, push, onValue, remove, get, child } from "https://www.gstatic.com/firebasejs/9.9.2/firebase-database.js";
+
+    const firebaseConfig = {
+          apiKey: "AIzaSyCi89QrbsT1egVYx0qJtefWVay15tamKd0",
+          authDomain: "todolist-3dd1f.firebaseapp.com",
+          databaseURL: "https://todolist-3dd1f-default-rtdb.firebaseio.com",
+          projectId: "todolist-3dd1f",
+          storageBucket: "todolist-3dd1f.appspot.com",
+          messagingSenderId: "99177537668",
+          appId: "1:99177537668:web:93d3037dbf267f2b37e2d1"
+        };
+      
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app);
+
+    onValue(ref(database, '/'), (snapshot)=>{
+        snapshot.forEach((childsnapshot)=>{
+            const phone = childsnapshot.key;
+            const name = childsnapshot.val().name;
+        })
+    });
+</script>
+<body>
+    <h4>TXT 월드투어 참여 현황</h4>
+    <div>월드투어 입장을 위한 사전 티켓팅 현황입니다.</div>
+    <div>
+        <div></div>
+    </div>
+</body>
+</html>
