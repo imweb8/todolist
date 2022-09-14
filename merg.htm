@@ -12,14 +12,14 @@
     import { getDatabase, ref, set, push, onValue, remove, get, child } from "https://www.gstatic.com/firebasejs/9.9.2/firebase-database.js";
 
     const firebaseConfig = {
-          apiKey: "AIzaSyCi89QrbsT1egVYx0qJtefWVay15tamKd0",
-          authDomain: "todolist-3dd1f.firebaseapp.com",
-          databaseURL: "https://todolist-3dd1f-default-rtdb.firebaseio.com",
-          projectId: "todolist-3dd1f",
-          storageBucket: "todolist-3dd1f.appspot.com",
-          messagingSenderId: "99177537668",
-          appId: "1:99177537668:web:93d3037dbf267f2b37e2d1"
-        };
+    apiKey: "AIzaSyBvlYTzSzaFgQdpknPcXjZDa4O-OGmpfG0",
+    authDomain: "reservation-bfb32.firebaseapp.com",
+    databaseURL: "https://reservation-bfb32-default-rtdb.firebaseio.com",
+    projectId: "reservation-bfb32",
+    storageBucket: "reservation-bfb32.appspot.com",
+    messagingSenderId: "478162541726",
+    appId: "1:478162541726:web:0501a0d8c9a57fcd772f8f"
+  };
       
     const app = initializeApp(firebaseConfig);
     const database = getDatabase(app);
@@ -40,9 +40,9 @@
 
             const div2 = document.createElement('div');
             const div2text = document.createTextNode(phone);
-            div1.appendChild(div2text);
-            document.getElementById(phone).appendChild(div2)
-        })
+            div2.appendChild(div2text);
+            document.getElementById(phone).appendChild(div2);
+        });
     });
 </script>
 <body>
